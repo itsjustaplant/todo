@@ -1,0 +1,17 @@
+.TaskList{
+    display: grid;
+    grid-template-columns: calc(100% - 150px) 110px;
+    column-gap: 20px;
+    row-gap: 20px;
+    padding: 18px 6px;
+    margin: 0;
+    width: clamp(375px, 60vw, 600px);
+}
+.TrashCan{
+    margin-left: auto;
+    justify-self: flex-end;
+    transition: transform 0.4s ease-in-out;
+}
+.TrashCan:hover{
+    transform: translateY(-1px);
+}

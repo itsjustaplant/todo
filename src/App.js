@@ -1,25 +1,77 @@
-import logo from './logo.svg';
+/* eslint-disable require-jsdoc, max-len*/
 import './App.css';
+import React from 'react';
+import {Header} from './components/Header';
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+import {AllTasks} from './pages/AllTasks.page';
+import {ActiveTasks} from './pages/ActiveTasks.page';
+import {CompletedTasks} from './pages/CompletedTasks.page';
+
+export default class App extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      page: 0,
+      tasks: [],
+    };
+    this.handlePage = this.handlePage.bind(this);
+    this.addTask = this.addTask.bind(this);
+    this.completeTask = this.completeTask.bind(this);
+  }
+  handlePage(id) {
+    this.setState({page: id});
+  }
+  addTask(value) {
+    this.setState({
+      tasks: [
+        ...this.state.tasks,
+        {
+          task: value,
+          isActive: true,
+        },
+      ],
+    });
+  }
+  completeTask(name, value) {
+    const index = parseInt(name);
+    const tasks = this.state.tasks;
+    tasks[index].isActive = !value;
+    this.setState({tasks: tasks});
+  }
+  render() {
+    let page = null;
+
+    switch (this.state.page) {
+      case 0:
+        page =
+            <AllTasks
+              taskList={this.state.tasks}
+              addTask={this.addTask}
+              completeTask={this.completeTask}
+            />;
+        break;
+      case 1:
+        page =
+            <ActiveTasks
+              taskList={this.state.tasks}
+              addTask={this.addTask}
+              completeTask={this.completeTask}
+            />;
+        break;
+      case 2:
+        page =
+            <CompletedTasks
+              taskList={this.state.tasks}
+              addTask={this.addTask}
+              completeTask={this.completeTask}
+            />;
+    }
+
+    return (
+      <div className="App">
+        <Header handlePage={this.handlePage}/>
+        {page}
+      </div>
+    );
+  }
 }
-
-export default App;
