@@ -38,12 +38,17 @@ export default class App extends React.Component {
     const tasks = this.state.tasks;
     tasks[index].isActive = !value;
     this.setState({tasks: tasks});
-    console.log(index);
   }
   deleteTask(index) {
-    let array = this.state.tasks;
+    let length = this.state.tasks.length;
+    const array = this.state.tasks;
     if (index === -1) {
-      array = [];
+      for (let i = 0; i < length; i++) {
+        if (!array[i].isActive) {
+          array.splice(i, 1);
+          length = array.length;
+        }
+      }
     } else {
       array.splice(index, 1);
     }
