@@ -50,7 +50,7 @@ export class AllTasks extends React.Component {
         <div>
           <TaskList>
             {this.props.taskList.map((task, index) => (
-              <Task key={index}>
+              <Task display={true} key={index}>
                 <Checkbox checked={!task.isActive} name={index} type='checkbox' onChange={this.handleCheck}/>
                 <TaskText lineThrough={task.isActive}>{task.task}</TaskText>
               </Task>

@@ -31,7 +31,7 @@ export class CompletedTasks extends React.Component {
             {
               this.props.taskList.filter((task) => !task.isActive)
                   .map((activeTask, index) => (
-                    <Task key={index}>
+                    <Task display={true} key={index}>
                       <Checkbox checked={true} name={index} type='checkbox' onChange={this.handleCheck}/>
                       <TaskText lineThrough={activeTask.isActive}>{activeTask.task}</TaskText>
                       <img onClick={() => this.props.deleteTask(index)} className='TrashCan' src='./delete_black_24dp.svg'/>

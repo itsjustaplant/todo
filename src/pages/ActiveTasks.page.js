@@ -42,15 +42,12 @@ export class ActiveTasks extends React.Component {
         <SubmitButton onClick={() => this.props.addTask(this.state.value)}>Add</SubmitButton>
         <div>
           <TaskList>
-            {
-              this.props.taskList.filter((task) => task.isActive)
-                  .map((activeTask, index) => (
-                    <Task key={index}>
-                      <Checkbox name={index} type='checkbox' onChange={this.handleCheck}/>
-                      <TaskText lineThrough={activeTask.isActive}>{activeTask.task}</TaskText>
-                    </Task>
-                  ))
-            }
+            {this.props.taskList.map((task, index) => (
+              <Task display={task.isActive} key={index}>
+                <Checkbox checked={!task.isActive} name={index} type='checkbox' onChange={this.handleCheck}/>
+                <TaskText lineThrough={task.isActive}>{task.task}</TaskText>
+              </Task>
+            ))}
           </TaskList>
         </div>
       </div>

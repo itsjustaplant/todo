@@ -17,6 +17,10 @@ class TaskElement extends React.Component {
     this.Tween = TweenMax.to(this.element, .4, {opacity: 1});
   }
 
+  componentWillUnmount() {
+    this.Tween = TweenMax.to(this.element, .4, {opacity: 0});
+  }
+
   render() {
     return (
       <li ref={(li) => this.element = li} className={this.props.className}>{this.props.children}</li>
@@ -25,7 +29,7 @@ class TaskElement extends React.Component {
 }
 
 export const Task = styled(TaskElement) `
-  display: flex;
+  display: ${(props) => (props.display ? 'flex' : 'none')};
   flex-direction: row;
   width: 100%;
   align-content: center;
