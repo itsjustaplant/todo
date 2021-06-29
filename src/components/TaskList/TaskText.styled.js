@@ -8,4 +8,5 @@ export const TaskText = styled.div `
   line-height: 24px;
   text-align: left;
   text-decoration: ${(props) => ((props.lineThrough) ? 'none' : 'line-through')};
+  color: ${(props) => ((!props.lineThrough) ? '#ff0f0f' : '#000000')};
 `;

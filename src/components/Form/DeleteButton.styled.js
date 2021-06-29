@@ -6,7 +6,7 @@ import styled from 'styled-components';
 import TweenMax from 'gsap';
 import PropTypes from 'prop-types';
 
-class SubmitButtonElement extends React.Component {
+class DeleteButtonElement extends React.Component {
   constructor(props) {
     super(props);
     this.element = null;
@@ -25,25 +25,33 @@ class SubmitButtonElement extends React.Component {
 }
 
 
-export const SubmitButton = styled(SubmitButtonElement) `
+export const DeleteButton = styled(DeleteButtonElement) `
+  display: flex;
+  align-content: center;
   font-family: 'Montserrat', sans-serif;
   font-weight: 600;
   font-size: 14px;
-  padding: 20px 40px;
-  background-color: #2f80ed;
+  line-height: 14px;
+  padding: 12px 24px;
+  background-color: #eb5757;
   color: #ffffff;
   outline: none;
   border: none;
-  border-radius: 12px;
-  box-shadow: 0px 2px 6px rgba(127, 177, 243, 0.4);
+  border-radius: 4px;
   opacity: 0;
   transition: background-color 0.4s ease-in-out;
+  margin-left: auto;
+  justify-self: flex-end;
   :hover{
-    background-color: #327bdb;
+    background-color: #e83f3f;
+  }
+  img{
+    width: 14px;
+    height: 14px;
   }
 `;
 
-SubmitButtonElement.propTypes = {
+DeleteButtonElement.propTypes = {
   onClick: PropTypes.func,
   children: PropTypes.any,
   className: PropTypes.any,

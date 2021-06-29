@@ -15,3 +15,7 @@
 .TrashCan:hover{
     transform: translateY(-1px);
 }
+.WhiteThrash{
+    width: 14px;
+    height: 14px;
+}

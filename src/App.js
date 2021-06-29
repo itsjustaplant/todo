@@ -17,6 +17,7 @@ export default class App extends React.Component {
     this.handlePage = this.handlePage.bind(this);
     this.addTask = this.addTask.bind(this);
     this.completeTask = this.completeTask.bind(this);
+    this.deleteTask = this.deleteTask.bind(this);
   }
   handlePage(id) {
     this.setState({page: id});
@@ -37,6 +38,17 @@ export default class App extends React.Component {
     const tasks = this.state.tasks;
     tasks[index].isActive = !value;
     this.setState({tasks: tasks});
+  }
+  deleteTask(index) {
+    let array = this.state.tasks;
+    if (index === -1) {
+      array = [];
+    } else {
+      array.splice(index, 1);
+    }
+    this.setState({
+      tasks: array,
+    });
   }
   render() {
     let page = null;
@@ -64,6 +76,7 @@ export default class App extends React.Component {
               taskList={this.state.tasks}
               addTask={this.addTask}
               completeTask={this.completeTask}
+              deleteTask={this.deleteTask}
             />;
     }
 

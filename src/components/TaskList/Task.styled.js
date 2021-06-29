@@ -1,9 +1,39 @@
-import styled from 'styled-components';
+/* eslint-disable require-jsdoc, max-len*/
 
-export const Task = styled.li `
+import React from 'react';
+
+import styled from 'styled-components';
+import PropTypes from 'prop-types';
+import TweenMax from 'gsap';
+
+class TaskElement extends React.Component {
+  constructor(props) {
+    super(props);
+    this.element = null;
+    this.Tween = null;
+  }
+
+  componentDidMount() {
+    this.Tween = TweenMax.to(this.element, .4, {opacity: 1});
+  }
+
+  render() {
+    return (
+      <li ref={(li) => this.element = li} className={this.props.className}>{this.props.children}</li>
+    );
+  }
+}
+
+export const Task = styled(TaskElement) `
   display: flex;
   flex-direction: row;
   width: 100%;
   align-content: center;
   align-items: center;
+  opacity: 0;
 `;
+
+TaskElement.propTypes = {
+  children: PropTypes.any,
+  className: PropTypes.any,
+};

@@ -9,6 +9,7 @@ import {Task} from '../components/TaskList/Task.styled';
 import {Checkbox} from '../components/TaskList/Checkbox.styled';
 import {TaskText} from '../components/TaskList/TaskText.styled';
 import PropTypes from 'prop-types';
+import {DeleteButton} from '../components/Form/DeleteButton.styled';
 
 export class CompletedTasks extends React.Component {
   constructor(props) {
@@ -24,8 +25,8 @@ export class CompletedTasks extends React.Component {
   }
   render() {
     return (
-      <div className='TaskList'>
-        <div>
+      <div>
+        <div className='TaskList'>
           <TaskList>
             {
               this.props.taskList.filter((task) => !task.isActive)
@@ -33,11 +34,14 @@ export class CompletedTasks extends React.Component {
                     <Task key={index}>
                       <Checkbox checked={true} name={index} type='checkbox' onChange={this.handleCheck}/>
                       <TaskText lineThrough={activeTask.isActive}>{activeTask.task}</TaskText>
-                      <img onClick={() => console.log('hey')} className='TrashCan' src='./delete_black_24dp.svg'/>
+                      <img onClick={() => this.props.deleteTask(index)} className='TrashCan' src='./delete_black_24dp.svg'/>
                     </Task>
                   ))
             }
           </TaskList>
+        </div>
+        <div style={{display: 'flex'}}>
+          <DeleteButton onClick={() => this.props.deleteTask(-1)}><img src='./delete_white_24dp.svg'/>delete all</DeleteButton>
         </div>
       </div>
     );
@@ -47,4 +51,5 @@ CompletedTasks.propTypes = {
   taskList: PropTypes.array,
   addTask: PropTypes.func,
   completeTask: PropTypes.func,
+  deleteTask: PropTypes.func,
 };

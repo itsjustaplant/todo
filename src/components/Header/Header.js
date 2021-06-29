@@ -2,6 +2,7 @@
 
 import React from 'react';
 import PropTypes from 'prop-types';
+import TweenMax from 'gsap';
 
 import {Title} from './Title.styled';
 import {NavBar} from './NavBar.styled';
@@ -11,6 +12,8 @@ import {ButtonBorder} from './ButtonBorder.styled';
 export class Header extends React.Component {
   constructor(props) {
     super(props);
+    this.element = null;
+    this.Tween = null;
     this.state = {
       borderOpacity: [1, 0, 0],
     };
@@ -25,9 +28,13 @@ export class Header extends React.Component {
     this.props.handlePage(id);
   }
 
+  componentDidMount() {
+    this.Tween = TweenMax.to(this.element, .4, {opacity: 1});
+  }
+
   render() {
     return (
-      <div>
+      <div style={{opacity: 0}} ref={(div) => this.element = div}>
         <Title>#todo</Title>
         <NavBar>
           <NavButton onClick={() => this.handleOpacity(0)}>All</NavButton>
